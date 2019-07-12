@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>FritzClient</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/page.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <script>
+        const { ipcRenderer } = require("electron");
+        function connect() {
+            ipcRenderer.send("connect");
+        }
+        function disconnect() {
+            ipcRenderer.send("disconnect");
+        }
+        ipcRenderer.on("log", (event, text) => {
+            const logger = document.getElementById("logmain");
+            const node = document.createElement("LI");
+            const textnode = document.createTextNode(text);
+            node.appendChild(textnode);
+            logger.appendChild(node);
+        });
+        ipcRenderer.on("call", (event, data) => document.getElementById("info").innerHTML = data.caller);
+        ipcRenderer.on("callEnd", () => document.getElementById("info").innerHTML = "");
+        ipcRenderer.on("wsopened", () => document.getElementById("conndisplay").innerHTML = `<button class="waves-effect waves-light btn green" onclick="disconnect()">Verbunden</button>`);
+        ipcRenderer.on("wsclosed", () => document.getElementById("conndisplay").innerHTML = `<button class="waves-effect waves-light btn red" onclick="connect()">Getrennt</button>`);
+    </script>
+</head>
+
+<body>
+    <div id="conndisplay"><button class="waves-effect waves-light btn red" onclick="connect()">Getrennt</button></div>
+    <div id="info">
+
+    </div>
+    <ul id="logmain">
+
+    </ul>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>

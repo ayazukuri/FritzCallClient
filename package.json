@@ -1,0 +1,20 @@
+{
+  "name": "fritzclient",
+  "version": "1.0.0",
+  "description": "Client Applikation für FritzCallWS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "FritzCallClient"
+  },
+  "author": "onerisc",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^5.0.6",
+    "ws": "^7.1.0"
+  }
+}

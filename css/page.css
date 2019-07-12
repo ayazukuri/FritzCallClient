@@ -1,0 +1,14 @@
+body {
+    padding: 30px;
+}
+
+#logmain {
+    position: absolute;
+    right: 10%;
+}
+
+#info {
+    margin-top: 20px;
+    font-size: 60px;
+    position: absolute;
+}

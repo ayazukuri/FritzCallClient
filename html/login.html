@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../css/page.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+    <link rel="icon" href="../src/anchor.png">
+
+    <script>
+        const { ipcRenderer } = require("electron");
+        function sendLogin(username, password) {
+            ipcRenderer.send("login", username, password);
+        }
+        window.addEventListener("keypress", e => {
+            if (e.keyCode === 13) document.getElementById("submit").click();
+        });
+        ipcRenderer.on("log", (event, text) => {
+            document.getElementById("log").innerHTML += "\n" + text;
+        });
+    </script>
+</head>
+
+<body>
+    <div id="login_center">
+        <label class="login">Benutzername</label><br>
+        <input class="login" id="username"><br>
+        <label class="login">Passwort</label><br>
+        <input class="login" id="password" type="password"><br>
+    </div>
+    <div id="login_bottom">
+        <button id="submit" class="waves-effect waves-light btn green" onclick="sendLogin(document.getElementById(`username`).value, document.getElementById(`password`).value)">Anmelden↩</button>
+    </div>
+    <div id="log"></div>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>
