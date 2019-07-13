@@ -27,7 +27,10 @@ function showLogin(text) {
     login.loadFile("./html/login.html");
     login.setMenu(null);
     login.once("ready-to-show", login.show);
-    login.on("close", app.quit);
+    login.on("close", () => {
+        if (wes) wes.close();
+        app.quit();
+    });
     login.on("closed", () => login = null);
     if (text) log(text, login);
 }
@@ -37,7 +40,10 @@ function showMain() {
     win.loadFile("./index.html");
     win.setMenu(null);
     win.once("ready-to-show", win.show);
-    win.on("close", app.quit);
+    win.on("close", () => {
+        if (wes) wes.close();
+        app.quit();
+    });
     win.on("closed", () => win = null);
 }
 
